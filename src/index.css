@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand palette — Blue / Purple with status accents */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #4f6ef2;
+  --color-brand-600: #2f5fea;
+  --color-brand-700: #2547c2;
+  --color-brand-800: #1f3a99;
+  --color-brand-900: #1c3277;
+
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede8ff;
+  --color-violet-200: #dcd3fe;
+  --color-violet-300: #c1adfd;
+  --color-violet-400: #a17ffa;
+  --color-violet-500: #8a5cf6;
+  --color-violet-600: #7b4cf0;
+  --color-violet-700: #6636d6;
+  --color-violet-800: #542caf;
+
+  --color-ink-50: #f6f7fb;
+  --color-ink-100: #eceef5;
+  --color-ink-200: #d9dce8;
+  --color-ink-300: #b3b9cf;
+  --color-ink-400: #7c85a3;
+  --color-ink-500: #565f80;
+  --color-ink-600: #3d4560;
+  --color-ink-700: #2a3049;
+  --color-ink-800: #1a1f33;
+  --color-ink-900: #0e1220;
+
+  --color-success-500: #16a34a;
+  --color-success-100: #dcfce7;
+  --color-warning-500: #d97706;
+  --color-warning-100: #fef3c7;
+  --color-danger-500: #dc2626;
+  --color-danger-100: #fee2e2;
+
+  --font-display: "Space Grotesk", "SF Pro Display", Inter, system-ui, sans-serif;
+  --font-body: "Inter", "SF Pro Display", system-ui, sans-serif;
+
+  --radius-card: 18px;
+  --radius-control: 12px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+  }
+  body {
+    @apply bg-ink-50 text-ink-800 antialiased;
+    background-image:
+      radial-gradient(circle at 10% 0%, rgba(123, 76, 240, 0.06), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(47, 95, 234, 0.08), transparent 45%);
+    background-attachment: fixed;
+  }
+  .dark body {
+    @apply bg-ink-900 text-ink-100;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgba(30,41,90,0.08)];
+  }
+  .dark .glass {
+    @apply bg-ink-800/60 border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.35)];
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(124,133,163,0.4); border-radius: 999px; }
+
+  /*
+   * Body/caption text across the pages uses plain text-ink-400/500/600/700/800
+   * classes (tuned for light backgrounds) without a per-usage dark: variant.
+   * These overrides recolor just those text-color utilities once inside a
+   * .dark context, using the same target shades already established by the
+   * UI primitives (card, table, select, dropdown, label, button, sidebar) so
+   * everything stays visually consistent.
+   */
+  .dark .text-ink-400 { color: var(--color-ink-300); }
+  .dark .text-ink-500 { color: var(--color-ink-300); }
+  .dark .text-ink-600 { color: var(--color-ink-200); }
+  .dark .text-ink-700 { color: var(--color-ink-100); }
+  .dark .text-ink-800 { color: #ffffff; }
+}
